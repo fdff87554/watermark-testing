@@ -43,7 +43,7 @@ def watermark_detect(mrg, size, alpha, pls_len):
             break
 
     mark_f = np.resize(mark_f, (size, size))
-    mark = idct(mark_f) / alpha
+    mark = idct(mark_f)
     avg = np.average(mark)
     mark[mark > avg] = 255
     mark[mark <= avg] = 0
@@ -87,8 +87,8 @@ if __name__ == '__main__':
     parser.add_argument('--color', type=str, default='RGB', help='color type of image, ex: L, RGB, RGBA')
     parser.add_argument('--merge', type=str, default='images/outputs/merge.png', help='merge image path')
     parser.add_argument('--size', type=int, default=100, help='mark size')
-    parser.add_argument('--alpha', type=float, default=0.05, help='merge alpha')
-    parser.add_argument('--pls-num', type=int, default=10, help='merge alpha')
+    parser.add_argument('--alpha', type=float, default=0.1, help='merge alpha')
+    parser.add_argument('--pls-num', type=int, default=2, help='merge alpha')
     parser.add_argument('--project', default='images/outputs', help='save to project/name')
     parser.add_argument('--name', default='detect.png', help='save to project/name')
     opt = parser.parse_args()

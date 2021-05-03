@@ -25,7 +25,7 @@ def place_define(cvr, size):
         p_x = hei/2 - size/2
         p_y = wei/2 - size/2
 
-    return p_x, p_y
+    return int(p_x), int(p_y)
 
 
 def dct(img):

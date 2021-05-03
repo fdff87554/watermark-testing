@@ -52,12 +52,13 @@ def watermark_merge(cvr, mk, pls_len):
 
 def img_embed(cvr, mark, mk_size, alpha, pls_num):
     need = int(np.ceil((mk_size * mk_size / pls_num) ** 0.5) * 8)
+    print(need)
 
     # find embed part
     ph, pw = place_define(cvr, need)
     print(ph, pw)
     sub_cvr = cvr[ph:ph+need, pw:pw+need]
-    merge = watermark_merge(sub_cvr, mark * alpha, pls_num)
+    merge = watermark_merge(sub_cvr, mark, pls_num)
     merge_cvr = cvr
     merge_cvr[ph:ph+need, pw:pw+need] = merge
     plt.imshow(merge_cvr)
@@ -94,8 +95,8 @@ if __name__ == '__main__':
     parser.add_argument('--mark', type=str, default='images/inputs/mark.png', help='mark image path')
     parser.add_argument('--size', type=int, default=100, help='mark size')
     parser.add_argument('--color', type=str, default='RGB', help='color type of image, ex: L, RGB, RGBA')
-    parser.add_argument('--alpha', type=float, default=0.05, help='merge alpha')
-    parser.add_argument('--pls-num', type=int, default=10, help='merge alpha')
+    parser.add_argument('--alpha', type=float, default=0.1, help='merge alpha')
+    parser.add_argument('--pls-num', type=int, default=2, help='merge alpha')
     parser.add_argument('--project', default='images/outputs', help='save to project/name')
     parser.add_argument('--name', default='merge.png', help='save to project/name')
     opt = parser.parse_args()
