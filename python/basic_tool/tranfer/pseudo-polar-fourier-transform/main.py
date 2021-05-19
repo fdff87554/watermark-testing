@@ -1,6 +1,6 @@
 import cv2
+import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import pyplot as plt
 
 
 def test(img):
@@ -21,6 +21,12 @@ def test(img):
     plt.contourf(angles, radiuses, m)
     plt.show()
 
+    sample_angles = np.linspace(0, 2 * np.pi, len(m.sum(axis=0))) / np.pi * 180
+    turn_angle_in_degrees = 90 - sample_angles[np.argmax(m.sum(axis=0))]
+    print(turn_angle_in_degrees)
+    plt.plot(sample_angles, m.sum(axis=0))
+    plt.show()
+
 
 def transform_data(m):
     dpix, dpiy = m.shape
@@ -36,10 +42,7 @@ def transform_data(m):
 
 
 def main():
-    img = cv2.imread('./images/inputs/lena_color.png', cv2.IMREAD_GRAYSCALE)
-    print(img)
-    plt.imshow(img)
-    plt.show()
+    img = cv2.imread('./images/inputs/test.png', cv2.IMREAD_GRAYSCALE)
     test(img)
 
 
